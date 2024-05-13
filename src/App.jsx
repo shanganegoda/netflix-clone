@@ -1,14 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
 import Home from './pages/Home/Home.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import Login from './pages/Login/Login.jsx'
-import { Route, Routes } from 'react-router-dom'
 import Player from './pages/Player/Player.jsx'
+
+import { Route, Routes, useNavigate } from 'react-router-dom'
+
+import {auth} from './firebase.js'
+import { onAuthStateChanged } from 'firebase/auth'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    onAuthStateChanged(auth , (user) => {
+      if(user){
+        navigate('/')
+      } else {
+        navigate('/login')
+      }
+    })
+  },[])
+  
+
   return (
     <div>
+       <ToastContainer theme='dark'/>
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/login' element={<Login />}/>
