@@ -6,22 +6,13 @@ import hero_title from '../../assets/hero_title.png'
 import info_icon from '../../assets/info_icon.png'
 import play_icon from '../../assets/play_icon.png'
 import TitleCards from '../../components/TitleCards/TitleCards.jsx'
+import Footer from '../../components/Footer/Footer.jsx'
 
 const Home = () => {
 
-  const renders = useRef(1);
-  //const [renders2 , setRenders2] = useState(1)
-  const [name , setName] = useState("")
-
-  useEffect(() => {
-    console.log("rendered")
-    // setRenders2(current => current + 1);
-    renders.current += 1;
-  })
-
   return (
     <div className='home'>
-      <Navbar/>
+      <Navbar />
       <div className='hero'>
         <img src={hero_banner} className='banner-img'></img>
         <div className="hero-caption">
@@ -33,23 +24,17 @@ const Home = () => {
             <button className='btn'><img src={play_icon}></img>Play</button>
             <button className='btn dark-btn'><img src={info_icon}></img>More info</button>
           </div>
-          <TitleCards/>
+          <TitleCards />
         </div>
       </div>
       <div className="more-cards">
-        <TitleCards />
-        <TitleCards />
-        <TitleCards />
-        <TitleCards />
+        <TitleCards title={"Now Playing"} category={"now_playing"}/>
+        <TitleCards title={"Popular"} category={"popular"}/>
+        <TitleCards title={"Top Rated"} category={"top_rated"}/>
+        <TitleCards title={"Upcoming"} category={"upcoming"}/>
       </div>
-
-      {/* useRef example */}
-      <div className='input'>
-        <input value={name} onChange={e => setName(e.target.value)}></input>
-        <p>No. of renders = {renders.current}</p>
-      </div>
+      <Footer />
     </div>
-    // useRef example
   )
 }
 
